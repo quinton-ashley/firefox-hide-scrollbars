@@ -14,17 +14,17 @@
     "32": "icons/icon-32.png",
     "48": "icons/icon-48.png",
     "64": "icons/icon-64.png",
-    "128": "icons/logo-128.png",
+    "128": "icons/icon-128.png",
     "256": "icons/icon-256.png",
     "512": "icons/icon-512.png",
     "1024": "icons/icon-1024.png"
   },
-  "name": "firefox-hide-scrollbars",
+  "name": "hide-scrollbars",
   "permissions": [
     "webRequest",
     "webRequestBlocking",
     "*://*/*"
   ],
-  "short_name": "firefox-hide-scrollbars",
-  "version": "1.0.0"
+  "short_name": "hide-scrollbars",
+  "version": "1.0.1"
 }
