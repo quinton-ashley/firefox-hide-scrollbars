@@ -1,0 +1,5 @@
+@-moz-document url-prefix() {
+  html,body{
+    overflow: hidden !important;
+  }
+}
