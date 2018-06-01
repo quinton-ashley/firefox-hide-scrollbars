@@ -2,7 +2,7 @@
   "content_scripts": [{
     "matches": ["*://*/*"],
     "css": ["/css/qashto_firefox-hide-scrollbars.css"],
-    "js": ["/js/jquery.min.js", "/js/jquery.mousewheel.js", "/js/qashto_firefox-hide-scrollbars.js"],
+    "js": ["/js/jquery.min.js", "/js/jquery.mousewheel.min.js", "/js/qashto_firefox-hide-scrollbars.js"],
     "run_at": "document_end",
     "all_frames": true
   }],
@@ -26,5 +26,5 @@
     "*://*/*"
   ],
   "short_name": "hide-scrollbars",
-  "version": "1.0.1"
+  "version": "1.0.2"
 }
