@@ -8,15 +8,7 @@ $(function() {
   const log = console.log;
   log('hide-scrollbars');
 
-  $('head').append(`
-<style>
-@-moz-document url-prefix() {
-  html,body{
-    overflow: hidden !important;
-  }
-}
-</style>
-`);
+  $('html, body').css('overflow', 'hidden');
 
   // https://stackoverflow.com/a/29956714/3792062
   $.fn.isHScrollable = function() {
