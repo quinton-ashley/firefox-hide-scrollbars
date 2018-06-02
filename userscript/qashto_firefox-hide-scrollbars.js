@@ -149,20 +149,6 @@ if (OSName == 'Windows') {
         event.originalEvent.wheelDelta
       );
     });
-
-    $('textarea, pre').mouseover(function() {
-      if ($(this).isHScrollable()) {
-        scrollPageX = false;
-        log('false X');
-      }
-      if ($(this).isVScrollable()) {
-        scrollPageY = false;
-        log('false Y');
-      }
-    }).mouseout(function() {
-      scrollPageX = scrollPageY = true;
-      log('true');
-    });
   });
 } else {
   console.log('Incompatible OS: ' + OSName);
