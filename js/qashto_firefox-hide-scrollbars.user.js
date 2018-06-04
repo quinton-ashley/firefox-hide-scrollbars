@@ -160,3 +160,5 @@ exportFunction(documentAddEventListener, Document.prototype, {
 exportFunction(documentRemoveEventListener, Document.prototype, {
   defineAs: 'removeEventListener'
 });
+
+console.log('scrollbars hidden!');
