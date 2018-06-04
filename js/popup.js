@@ -8,7 +8,8 @@ $(function() {
     let bg = await browser.runtime.getBackgroundPage();
 
     function updateButton($button) {
-      if (bg.hideScrollbars) {
+      console.log(bg.scrollbarsHidden);
+      if (bg.scrollbarsHidden) {
         $button.removeClass('toggle-ext-on');
         $button.addClass('toggle-ext-off');
         $button.html('show');
@@ -20,7 +21,11 @@ $(function() {
     }
 
     function update($button) {
-      bg.hideScrollbars = !bg.hideScrollbars;
+      if (bg.scrollbarsHidden) {
+        bg.showScrollbars();
+      } else {
+        bg.hideScrollbars();
+      }
       updateButton($button);
     }
 

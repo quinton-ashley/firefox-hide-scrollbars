@@ -1,20 +1,29 @@
-var hideScrollbars = true;
+var scrollbarsHidden = true;
+var contentScript;
 
-async function addScripts() {
-  await browser.tabs.executeScript({
-    file: '/js/qashto_firefox-hide-scrollbars.user.js',
-    allFrames: true
+function hideScrollbars () {
+  browser.contentScripts.register({
+    js: [{
+      file: "js/qashto_firefox-hide-scrollbars.user.js"
+    }],
+    css: [{
+      file: "css/content.css"
+    }],
+    matches: [ "<all_urls>" ],
+    runAt: "document_start"
+  }).then(contentScriptObject => {
+    contentScript = contentScriptObject;
   });
+
+  scrollbarsHidden = true;
 }
 
-function handleUpdated(tabId, changeInfo, tabInfo) {
-  if (changeInfo.url) {
-    console.log('Tab: ' + tabId +
-      ' URL changed to ' + changeInfo.url);
-    if (hideScrollbars) {
-      addScripts();
-    }
+function showScrollbars () {
+  if (contentScript) {
+    contentScript.unregister();
   }
+
+  scrollbarsHidden = false;
 }
 
-browser.tabs.onUpdated.addListener(handleUpdated);
+hideScrollbars();

@@ -1,82 +1,109 @@
-// ==UserScript==
-// @name         Firefox Hide Scrollbars
-// @namespace    http://qashto.com/
-// @version      2.0.0
-// @description  Hide Scrollbars in Firefox
-// @author       qashto
-// @match        *://*/*
-// @run-at       document-start
-// @grant        GM_addStyle
-// ==/UserScript==
+function getScrollbarSize() {
+  const div = document.createElement("div");
+  div.style.visibility = "hidden";
+  div.style.overflow = "scroll";
+  document.documentElement.appendChild(div);
 
-try {
-  console.log('hiding scrollbars...');
+  const scrollbarHeight = div.offsetHeight - div.clientHeight;
+  const scrollbarWidth = div.offsetWidth - div.clientWidth;
 
-  function addStyle(aCss) {
-    try {
-      GM_addStyle(aCss);
-    } catch (ror) {
-      let head = document.getElementsByTagName('head')[0];
-      if (head) {
-        let style = document.createElement('style');
-        style.setAttribute('type', 'text/css');
-        style.textContent = aCss;
-        head.appendChild(style);
-      }
-    }
-  }
+  div.remove();
 
-  addStyle(`
-    :root {
-      --scrollbar-height: 0;
-      --scrollbar-width: 0;
-      height: 100vh !important;
-      overflow: hidden !important;
-      position: relative !important;
-      width: 100vw !important;
-    }
-    :root,
-    body {
-      max-height: initial !important;
-      max-width: initial !important;
-      min-height: initial !important;
-      min-width: initial !important;
-    }
-    body {
-      height: calc(100vh + var(--scrollbar-height)) !important;
-      overflow: auto !important;
-      width: calc(100vw + var(--scrollbar-width)) !important;
-    }
-  `);
+  return [
+    scrollbarWidth,
+    scrollbarHeight
+  ];
+}
 
-  function getScrollbarSize() {
-    const div = document.createElement("div");
-    div.style.visibility = "hidden";
-    div.style.overflow = "scroll";
-    document.documentElement.appendChild(div);
+document.addEventListener("DOMContentLoaded", () => {
+  const [scrollbarWidth, scrollbarHeight] = getScrollbarSize();
 
-    const scrollbarHeight = div.offsetHeight - div.clientHeight;
-    const scrollbarWidth = div.offsetWidth - div.clientWidth;
+  document.body.style.setProperty(
+    "--scrollbar-height", `${scrollbarHeight}px`);
+  document.body.style.setProperty(
+    "--scrollbar-width", `${scrollbarWidth}px`);
 
-    div.remove();
 
-    return [
-      scrollbarWidth,
-      scrollbarHeight
-    ];
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const [scrollbarWidth, scrollbarHeight] = getScrollbarSize();
-
-    document.body.style.setProperty(
-      "--scrollbar-height", `${scrollbarHeight}px`);
-    document.body.style.setProperty(
-      "--scrollbar-width", `${scrollbarWidth}px`);
+  document.body.addEventListener("scroll", ev => {
+    const scrollLeft = cloneInto(document.body.scrollLeft, window);
+    const scrollTop = cloneInto(document.body.scrollTop, window);
+    
+    window.wrappedJSObject.scrollX = scrollLeft;
+    window.wrappedJSObject.pageXOffset = scrollLeft;
+    window.wrappedJSObject.scrollY = scrollTop;
+    window.wrappedJSObject.pageYOffset = scrollTop;
   });
 
-  console.log('scrollbars hidden!');
+  exportFunction(document.body.scroll.bind(document.body), window,
+      { defineAs: "scroll" });
+  exportFunction(document.body.scrollTo.bind(document.body), window,
+      { defineAs: "scrollTo" });
+  exportFunction(document.body.scrollBy.bind(document.body), window,
+      { defineAs: "scrollBy" });
+});
 
-} catch (ror) {
-  console.error(ror);
+
+let documentScrollHandler;
+
+Object.defineProperties(Document.prototype, {
+  scrollingElement: {
+    get () {
+      return document.body;
+    }
+  },
+  onscroll: {
+    get () {
+      return documentScrollHandler;
+    },
+    set (listener) {
+      document.body.addEventListener("scroll", listener);
+    }
+  }
+});
+
+
+function handleAddScrollEvent () {
+  if (arguments[0] === "scroll") {
+    document.body.addEventListener(...arguments);
+    return;
+  }
 }
+function handleRemoveScrollEvent () {
+  if (arguments[0] === "scroll") {
+    document.body.removeEventListener(...arguments);
+    return;
+  }
+}
+
+
+const initial_windowAddEventListener = Window.prototype.addEventListener;
+const initial_windowRemoveEventListener = Window.prototype.addEventListener;
+const initial_documentAddEventListener = Document.prototype.addEventListener;
+const initial_documentRemoveEventListener = Document.prototype.addEventListener;
+
+function windowAddEventListener () {
+  handleAddScrollEvent(...arguments);
+  initial_windowAddEventListener.apply(this, arguments);
+}
+function windowRemoveEventListener () {
+  handleRemoveScrollEvent(...arguments);
+  initial_windowAddEventListener.apply(this, arguments);
+}
+function documentAddEventListener () {
+  console.log(arguments);
+  handleAddScrollEvent(...arguments);
+  initial_documentAddEventListener.apply(this, arguments);
+}
+function documentRemoveEventListener () {
+  handleRemoveScrollEvent(...arguments);
+  initial_documentAddEventListener.apply(this, arguments);
+}
+
+exportFunction(windowAddEventListener, Window.prototype,
+    { defineAs: "addEventListener" });
+exportFunction(windowRemoveEventListener, Window.prototype,
+    { defineAs: "removeEventListener" });
+exportFunction(documentAddEventListener, Document.prototype,
+    { defineAs: "addEventListener" });
+exportFunction(documentRemoveEventListener, Document.prototype,
+    { defineAs: "removeEventListener" });
