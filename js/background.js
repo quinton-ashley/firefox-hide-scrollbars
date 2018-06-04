@@ -1,16 +1,17 @@
 var scrollbarsHidden = true;
 var contentScript;
 
-function hideScrollbars () {
+function hideScrollbars() {
   browser.contentScripts.register({
     js: [{
-      file: "js/qashto_firefox-hide-scrollbars.user.js"
+      file: 'js/qashto_firefox-hide-scrollbars.user.js'
     }],
     css: [{
-      file: "css/content.css"
+      file: 'css/content.css'
     }],
-    matches: [ "<all_urls>" ],
-    runAt: "document_start"
+    matches: ['<all_urls>'],
+    excludeMatches: ['*://developer.mozilla.org/*', '*://www.youtube.com/*'],
+    runAt: 'document_start'
   }).then(contentScriptObject => {
     contentScript = contentScriptObject;
   });
@@ -18,7 +19,7 @@ function hideScrollbars () {
   scrollbarsHidden = true;
 }
 
-function showScrollbars () {
+function showScrollbars() {
   if (contentScript) {
     contentScript.unregister();
   }
