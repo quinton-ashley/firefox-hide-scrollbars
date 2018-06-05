@@ -40,6 +40,65 @@ try {
 `);
 } catch (ror) {}
 
+/**
+ * Compatibility with userscripts. Userscripts run in a different context to
+ * content scripts and don't need to make structured clones to pass objects
+ * to page scripts.
+ */
+if (!exportFunction && !cloneInto) {
+  function exportFunction(func, targetScope, options = {}) {
+    if (options.defineAs) {
+      targetScope[options.defineAs] = func;
+    }
+    
+    return func;
+  }
+  
+  function cloneInto(obj) {
+    return obj;
+  }
+
+  window.wrappedJSObject = window;
+
+
+  // Userscript-specific definition of document getters/setters
+  let documentScrollHandler;
+  Object.defineProperties(Document.prototype, {
+    scrollingElement: {
+      get() {
+        return document.body;
+      }
+    },
+    onscroll: {
+      get() {
+        return documentScrollHandler;
+      },
+      set(listener) {
+        if (documentScrollHandler) {
+          document.body.removeEventListener("scroll", documentScrollHandler);
+        }
+        if (listener) {
+          documentScrollHandler = listener;
+          document.body.addEventListener('scroll', documentScrollHandler);
+        }
+      }
+    }
+  });
+} else if (browser && browser.runtime && browser.runtime.id) {
+  /**
+   * getters/setters cannot be passed via structured clone, so we have to inject
+   * a script into the page context.
+   */
+
+  const scriptElement = document.createElement("script");
+  scriptElement.src = browser.runtime.getURL("js/pageContext.js");
+  scriptElement.addEventListener("load", () => {
+    scriptElement.remove();
+  });
+
+  document.documentElement.appendChild(scriptElement);
+}
+
 function getScrollbarSize() {
   const div = document.createElement('div');
   div.style.visibility = 'hidden';
@@ -87,26 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-let documentScrollHandler;
-
-Object.defineProperties(Document.prototype, {
-  scrollingElement: {
-    get() {
-      return document.body;
-    }
-  },
-  onscroll: {
-    get() {
-      return documentScrollHandler;
-    },
-    set(listener) {
-      document.body.addEventListener('scroll', listener);
-    }
-  }
-});
-
-
 function handleAddScrollEvent() {
   if (arguments[0] === 'scroll') {
     document.body.addEventListener(...arguments);
@@ -138,7 +177,6 @@ function windowRemoveEventListener() {
 }
 
 function documentAddEventListener() {
-  // console.log(arguments);
   handleAddScrollEvent(...arguments);
   initial_documentAddEventListener.apply(this, arguments);
 }
