@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Firefox Hide Scrollbars
 // @namespace    http://qashto.com/
-// @version      2.0.3
+// @version      2.0.4
 // @description  Hide Scrollbars in Firefox
 // @author       qashto
 // @match        *://*/*
@@ -50,10 +50,10 @@ if (!exportFunction && !cloneInto) {
     if (options.defineAs) {
       targetScope[options.defineAs] = func;
     }
-    
+
     return func;
   }
-  
+
   function cloneInto(obj) {
     return obj;
   }
