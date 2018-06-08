@@ -21,5 +21,5 @@
     "version": "git add -A",
     "postversion": "git push && git push --tags && web-ext build"
   },
-  "version": "2.0.4"
+  "version": "2.0.5"
 }

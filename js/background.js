@@ -10,7 +10,7 @@ function hideScrollbars() {
       file: 'css/content.css'
     }],
     matches: ['<all_urls>'],
-    excludeMatches: ['*://developer.mozilla.org/*', '*://www.youtube.com/*'],
+    excludeMatches: ['*://developer.mozilla.org/*', '*://mail.google.com/*', '*://www.youtube.com/*'],
     runAt: 'document_start'
   }).then(contentScriptObject => {
     contentScript = contentScriptObject;
