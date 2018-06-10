@@ -3,7 +3,6 @@
   --scrollbar-width: 0;
   height: 100vh !important;
   overflow: hidden !important;
-  position: relative !important;
   width: 100vw !important;
 }
 
@@ -13,6 +12,7 @@ body {
   max-width: initial !important;
   min-height: initial !important;
   min-width: initial !important;
+  position: relative !important;
 }
 
 body {
