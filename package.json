@@ -7,6 +7,12 @@
   "description": "Hides scrollbars for Firefox 60+",
   "homepage": "https://github.com/quinton-ashley/firefox-hide-scrollbars#readme",
   "keywords": [
+    "ext",
+    "UI",
+    "userscript",
+    "usercss",
+    "firefox",
+    "addon",
     "scrollbars"
   ],
   "license": "MIT",
@@ -19,7 +25,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "version": "git add -A",
-    "postversion": "git push && git push --tags && web-ext build"
+    "postversion": "git remote | xargs -L1 git push --all && git push --tags && web-ext build"
   },
-  "version": "2.0.5"
+  "version": "2.0.6"
 }
