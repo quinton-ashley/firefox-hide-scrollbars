@@ -2,9 +2,10 @@
 
 Hide scrollbars in Firefox while still being able to scroll!
 
-### Download
+### Install
 
 [firefox addon](https://addons.mozilla.org/en-US/firefox/addon/hide-scrollbars/)
+[userscript](https://github.com/quinton-ashley/firefox-hide-scrollbars/raw/master/js/qashto_firefox-hide-scrollbars.user.js)
 
 ### Credits
 

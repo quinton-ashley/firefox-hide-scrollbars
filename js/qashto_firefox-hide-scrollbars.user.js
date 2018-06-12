@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Firefox Hide Scrollbars
 // @namespace    http://qashto.com/
-// @version      2.0.8
+// @version      2.0.9
 // @description  Hide Scrollbars in Firefox
 // @author       qashto
 // @match        *://*/*
@@ -13,7 +13,7 @@
 console.log('hiding scrollbars...');
 
 // if used as userscript add style with GM_addStyle
-try {
+if (typeof GM_addStyle !== 'undefined') {
   GM_addStyle(`
     :root {
       --scrollbar-height: 0;
@@ -37,8 +37,8 @@ try {
       overflow: auto !important;
       width: calc(100vw + var(--scrollbar-width)) !important;
     }
-`);
-} catch (ror) {}
+  `);
+}
 
 /**
  * Compatibility with userscripts. Userscripts run in a different context to
