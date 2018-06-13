@@ -30,6 +30,7 @@ if (typeof GM_addStyle !== 'undefined') {
       max-width: initial !important;
       min-height: initial !important;
       min-width: initial !important;
+      position: relative;
     }
 
     body {
@@ -89,7 +90,6 @@ if (!exportFunction && !cloneInto) {
    * getters/setters cannot be passed via structured clone, so we have to inject
    * a script into the page context.
    */
-
   const scriptElement = document.createElement("script");
   scriptElement.src = browser.runtime.getURL("js/pageContext.js");
   scriptElement.addEventListener("load", () => {
@@ -162,9 +162,9 @@ function handleRemoveScrollEvent() {
 
 
 const initial_windowAddEventListener = Window.prototype.addEventListener;
-const initial_windowRemoveEventListener = Window.prototype.addEventListener;
+const initial_windowRemoveEventListener = Window.prototype.removeEventListener;
 const initial_documentAddEventListener = Document.prototype.addEventListener;
-const initial_documentRemoveEventListener = Document.prototype.addEventListener;
+const initial_documentRemoveEventListener = Document.prototype.removeEventListener;
 
 function windowAddEventListener() {
   handleAddScrollEvent(...arguments);
@@ -173,7 +173,7 @@ function windowAddEventListener() {
 
 function windowRemoveEventListener() {
   handleRemoveScrollEvent(...arguments);
-  initial_windowAddEventListener.apply(this, arguments);
+  initial_windowRemoveEventListener.apply(this, arguments);
 }
 
 function documentAddEventListener() {
@@ -183,7 +183,7 @@ function documentAddEventListener() {
 
 function documentRemoveEventListener() {
   handleRemoveScrollEvent(...arguments);
-  initial_documentAddEventListener.apply(this, arguments);
+  initial_documentRemoveEventListener.apply(this, arguments);
 }
 
 exportFunction(windowAddEventListener, Window.prototype, {
