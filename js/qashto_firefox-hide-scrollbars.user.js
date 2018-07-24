@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Firefox Hide Scrollbars
 // @namespace    http://qashto.com/
-// @version      2.1.1
+// @version      2.1.2
 // @description  Hide Scrollbars in Firefox
 // @author       qashto
 // @match        *://*/*
