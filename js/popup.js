@@ -12,7 +12,7 @@ $(function() {
 			if (bg.scrollbarsHidden) {
 				$button.removeClass('toggle-ext-on');
 				$button.addClass('toggle-ext-off');
-				$button.html('disable');
+				$button.html(bg.exclude);
 			} else {
 				$button.removeClass('toggle-ext-off');
 				$button.addClass('toggle-ext-on');

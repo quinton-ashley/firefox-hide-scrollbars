@@ -28,5 +28,5 @@
     "postversion": "git remote | xargs -L1 git push --all && git push --tags && web-ext build",
     "v": "npm version patch --force"
   },
-  "version": "2.1.4"
+  "version": "2.1.5"
 }

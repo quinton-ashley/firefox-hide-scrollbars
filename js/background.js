@@ -1,18 +1,19 @@
 var scrollbarsHidden = true;
 var contentScript;
+// var exclude1 = ['*://accounts.google.com/*', '*://photos.google.com/*'];
+// exclude = exclude.concat(exclude1);
 
 function hideScrollbars() {
-	var exclude = ['*://*/*.jpg', '*://*/*.png', '*://*/*.gif', '*://*/*.mp4',
-		'*://*/*.tiff', '*://*/*.skg', '*://*/*.tif', '*://*/*.avi',
-		'*://*/*.mov', '*://*/*.flac', '*://*/*.wav', '*://*/*.aif',
-		'*://*/*.m4a', '*://*/*.mqa'
+	var exts = [
+		'jpg', 'png', 'gif', 'mp4', 'tiff', 'skg', 'tif', 'avi', 'mov', 'flac', 'wav', 'aif', 'm4a', 'mqa'
 	];
+	let exclude = [];
 	var i;
-	for (i = 0; i < arr.length; i++) {
-		exclude.push(exclude[i].toUpperCase());
+	for (i = 0; i < exts.length; i++) {
+		exclude.push('*://*/*.' + exts[i]);
+		exclude.push('*://*/*.' + exts[i].toUpperCase());
 	}
-	var exclude1 = ['*://accounts.google.com/*', '*://photos.google.com/*'];
-	exclude = exclude.concat(exclude1);
+	console.log(exclude);
 
 	browser.contentScripts.register({
 		js: [{
