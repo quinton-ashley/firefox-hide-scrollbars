@@ -13,6 +13,8 @@ function hideScrollbars() {
 		exclude.push('*://*/*.' + exts[i]);
 		exclude.push('*://*/*.' + exts[i].toUpperCase());
 	}
+	exclude.push('*://accounts.google.com/*');
+	exclude.push('*://mail.google.com/*');
 	console.log(exclude);
 
 	browser.contentScripts.register({
