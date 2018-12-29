@@ -2,18 +2,35 @@
 
 Hide scrollbars in Firefox while still being able to scroll!
 
-### Install
+## Known Issues
+
+-   doesn't work with any other scrolling related addons
+-   some sites will become unresponsive to scroll events
+
+## Solutions
+
+Don't use hide scrollbars if you rely on another scrolling related extension.  Although hide scrollbars works on most sites, some sites will be unresponsive or display improperly.  To fix this simply click "show" in the hide scrollbars menu and reload the page.
+
+## Donate
+
+If you would like to sponsor making this extension better please donate.  Otherwise, I am done working on this addon.
+
+### $20 Goal
+
+I will create a blacklist for sites so you don't have to keep enabling/disabling the extension on sites the hide scrollbars doesn't work on.
+
+### $50 Goal
+
+I will make a auto-hide side bar similar to the one in firefox on macOS.
+
+<https://www.patreon.com/qashto>  
+[paypal.me/qashto/5](paypal.me/qashto/5)
+
+## Install
 
 [firefox addon](https://addons.mozilla.org/en-US/firefox/addon/hide-scrollbars/)
 [userscript](https://github.com/quinton-ashley/firefox-hide-scrollbars/raw/master/js/qashto_firefox-hide-scrollbars.user.js)
 
-### Credits
+## Credits
 
 <https://gist.github.com/hensm/d3e2316c092e9df0c449abfcad24bc78>
-
-### Donate
-
-Ethereum: 0xb4355179da353f1BA4AA0BB5a7E3Ba4FdC7128ea  
-Bitcoin: 1562cPDAqTCtF1oX6RPMy1n8Rx6jvzYTvN  
-<https://www.patreon.com/qashto>  
-[paypal.me/qashto/5](paypal.me/qashto/5)
