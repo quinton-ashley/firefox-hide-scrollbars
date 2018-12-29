@@ -16,6 +16,10 @@ Don't use hide scrollbars if you rely on another scrolling related extension.  A
 
 If you would like to sponsor making this extension better please donate.  Otherwise, I am done working on this addon.
 
+### $10 Goal
+
+Fix problems with files when viewed in separate tabs
+
 ### $20 Goal
 
 I will create a blacklist for sites so you don't have to keep enabling/disabling the extension on sites the hide scrollbars doesn't work on.
