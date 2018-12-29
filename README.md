@@ -6,6 +6,7 @@ Hide scrollbars in Firefox while still being able to scroll!
 
 -   doesn't work with any other scrolling related addons
 -   some sites will become unresponsive to scroll events
+-   some images/other media files will not display properly when viewing them in their own tab
 
 ## Solutions
 
