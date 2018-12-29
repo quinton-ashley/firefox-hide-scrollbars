@@ -26,7 +26,7 @@ I will create a blacklist for sites so you don't have to keep enabling/disabling
 
 ### $50 Goal
 
-I will make a auto-hide side bar similar to the one in firefox on macOS.
+I will make a auto-hide scroll bar similar to the one in firefox on macOS.
 
 <https://www.patreon.com/qashto>  
 [paypal.me/qashto/5](paypal.me/qashto/5)
