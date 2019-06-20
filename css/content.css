@@ -1,22 +1,3 @@
-:root {
-  --scrollbar-height: 0;
-  --scrollbar-width: 0;
-  height: 100vh !important;
-  overflow: hidden !important;
-  width: 100vw !important;
-}
-
-:root,
-body {
-  max-height: initial !important;
-  max-width: initial !important;
-  min-height: initial !important;
-  min-width: initial !important;
-  position: relative !important;
-}
-
-body {
-  height: calc(100vh + var(--scrollbar-height)) !important;
-  overflow: auto !important;
-  width: calc(100vw + var(--scrollbar-width)) !important;
+* {
+	scrollbar-width: none !important;
 }
