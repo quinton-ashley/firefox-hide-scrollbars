@@ -1,11 +1,11 @@
-var scrollbarsHidden = true;
+var hide = true;
 var contentScript;
 
 function hideScrollbars() {
 
 	browser.contentScripts.register({
 		css: [{
-			file: 'css/content.css'
+			file: 'content.css'
 		}],
 		matches: ['<all_urls>'],
 		runAt: 'document_start'
@@ -13,7 +13,7 @@ function hideScrollbars() {
 		contentScript = contentScriptObject;
 	});
 
-	scrollbarsHidden = true;
+	hide = true;
 }
 
 function showScrollbars() {
@@ -21,7 +21,7 @@ function showScrollbars() {
 		contentScript.unregister();
 	}
 
-	scrollbarsHidden = false;
+	hide = false;
 }
 
 hideScrollbars();

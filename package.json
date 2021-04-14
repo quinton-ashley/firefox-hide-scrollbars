@@ -3,7 +3,6 @@
   "bugs": {
     "url": "https://github.com/quinton-ashley/firefox-hide-scrollbars/issues"
   },
-  "dependencies": {},
   "description": "Hides scrollbars for Firefox 60+",
   "homepage": "https://github.com/quinton-ashley/firefox-hide-scrollbars#readme",
   "keywords": [
@@ -28,5 +27,5 @@
     "postversion": "git remote | xargs -L1 git push --all && git push --tags && web-ext build",
     "v": "npm version patch --force"
   },
-  "version": "3.0.0"
+  "version": "3.0.1"
 }
